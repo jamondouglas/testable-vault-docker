@@ -1,6 +1,10 @@
-# THIS DOCKERFILE BASED ON https://github.com/voxxit/dockerfiles/blob/master/vault/Dockerfile
+# This Dockerfile is loosely based on voxxit/vault - https://github.com/voxxit/dockerfiles/blob/master/vault/Dockerfile
 
 FROM voxxit/base:alpine
+
+MAINTAINER "Pete Hodgson"
+LABEL version="0.1"
+LABEL description="A [Hashicorp Vault](https://www.vaultproject.io) server, pre-configured with a hardcoded root token. Intended for integration testing."
 
 # only needed so we can wget the vault release from an https url
 RUN apk --update add openssl 
