@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e -u
+
+echo 'initializing vault...'
+
+new_root_token='TEST_VAULT_ROOT_TOKEN'
+
+export VAULT_ADDR='http://localhost:8200'
+
+init_output=$(vault init -key-shares=1 -key-threshold=1)
+unseal_key=$(echo $init_output | grep -Eo '^Key 1: \S+' | grep -Eo '\S+$')
+root_token=$(echo $init_output | grep -Eo 'Initial Root Token: \S+' | grep -Eo '\S+$')
+
+echo unsealing vault with key $unseal_key
+vault unseal $unseal_key > /dev/null
+
+echo using root token $root_token
+export VAULT_TOKEN=$root_token
+
+echo "creating new root token"
+vault token-create -policy='root' -id=${new_root_token} > /dev/null
+echo "new root token created: ${new_root_token}"

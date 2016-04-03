@@ -14,7 +14,14 @@ RUN cd /tmp \
   && mv vault /usr/local/bin/ \
   && rm -f /tmp/vault*
 
+COPY vault_inmem_config.hcl /etc/vault.hcl
+
+COPY vault_init /usr/local/bin/
+RUN chmod u+x /usr/local/bin/vault_init
+
+COPY entrypoint /usr/local/bin/
+RUN chmod u+x /usr/local/bin/entrypoint
+
 EXPOSE 8200
 
-ENTRYPOINT [ "vault" ]
-CMD [ "server", "-dev" ]
+ENTRYPOINT [ "entrypoint" ]

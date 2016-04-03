@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e -u
+
+vault_init &
+
+vault server -config /etc/vault.hcl
