@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e -u
+
+export VAULT_ADDR="http://${VAULT_PORT_8200_TCP_ADDR}:${VAULT_PORT_8200_TCP_PORT}"
+export VAULT_TOKEN=TEST_VAULT_ROOT_TOKEN
+
+echo "----------- SMOKE TESTS -------------"
+vault status
+vault token-lookup
+
+echo "----------- SMOKE TESTS -------------"
+vault status
+vault token-lookup
+
+echo "----------- TESTS PASSED ------------"

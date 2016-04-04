@@ -1,0 +1,7 @@
+vault:
+  build: .
+
+tests:
+  build: test/
+  links: 
+    - vault

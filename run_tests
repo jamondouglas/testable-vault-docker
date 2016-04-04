@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e -u
+
+docker-compose build tests
+docker-compose run tests
