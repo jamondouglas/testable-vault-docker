@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e -u
+
+cat | jq -c 'to_entries|.[]' |\
+while read entry
+do
+  path=$(echo $entry | jq -r '.key')
+  data=$(echo $entry | jq -c '.value')
+  echo $data | vault write $path -
+done

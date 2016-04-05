@@ -20,3 +20,10 @@ export VAULT_TOKEN=$root_token
 echo "creating new root token"
 vault token-create -policy='root' -id=${new_root_token} > /dev/null
 echo "new root token created: ${new_root_token}"
+
+
+if [ -f /etc/vault_fixtures.json ]
+then
+  echo "LOADING VAULT FIXTURES..."
+	cat /etc/vault_fixtures.json | load_fixture_into_vault
+fi
