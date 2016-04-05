@@ -8,15 +8,16 @@ echo "----------- SMOKE TESTS -------------"
 vault status
 vault token-lookup
 
-echo "------ TEST FIXTURES ARE LOADED -------"
+echo "------ TEST THAT FIXTURES ARE LOADED -------"
 
-smokey_bear=$(vault read -field=bear secret/smokey)
-if [ "$smokey_bear" != "is here" ]
+fixture_data=$(vault read -field=the_fixture secret/test_fixture)
+if [ "$fixture_data" != "is loaded" ]
 then
-  echo 'expected /secret/smokey to contain bear="is here"'
+  echo 'expected /secret/test_fixture to contain ="is loaded", but got:'
+  echo $fixture_data
   exit 1
 else
-  echo fixtures read
+  echo test fixture successfully read
 fi
 
 echo "----------- TESTS PASSED ------------"

@@ -1,15 +1,5 @@
 {
-  "secret/smokey": {
-    "bear": "is here"
-  },
-  "secret/velvet-rope/username": {
-    "value": "welcome"
-  },
-  "secret/velvet-rope/password": {
-    "value": "home"
-  },
-  "secret/velvet-rope": {
-    "username": "welcome",
-    "password": "home"
+  "secret/test_fixture": {
+    "the_fixture": "is loaded"
   }
 }
