@@ -4,6 +4,15 @@ set -e
 
 DC=docker-compose
 
+
+R="\x1B[1;31m"
+G="\x1B[1;32m"
+W="\x1B[0m"
+
+function info {
+  echo -e "${G}${1}${W}"
+}
+
 function login {
   shift
 
