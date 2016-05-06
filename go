@@ -4,6 +4,28 @@ set -e
 
 DC=docker-compose
 
+function login {
+  shift
+
+  case "${1-docker}" in
+      docker) login_docker
+      ;;
+      *) echo $"Unknown dev command"
+        helptext
+        exit 1
+  esac
+}
+
+function login_docker {
+  info "Logging into docker"
+
+  : "${DOCKER_USERNAME?}"
+  : "${DOCKER_PASSWORD?}"
+  : "${DOCKER_EMAIL?}"
+
+  ${D} login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} -e ${DOCKER_EMAIL}
+}
+
 function ci {
   info "Setting up CI dependencies"
 
