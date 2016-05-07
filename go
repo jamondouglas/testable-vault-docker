@@ -60,9 +60,8 @@ function ci {
       snap)
         DOCKER_COMPOSE_VERSION=1.5.2  # latest supported version on SNAPCI
         : ${SNAP_CI?} # Validate that were in SNAPCI
-        pip -V
-        login_docker
         pip -v install ${DC}==${DOCKER_COMPOSE_VERSION}
+        login_docker
       ;;
        *) echo $"Unknown ci command"
         helptext
