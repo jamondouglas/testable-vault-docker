@@ -22,7 +22,7 @@ before_install:
     - sudo mv docker-compose /usr/local/bin
 
 script:  
-    - echo ${TRAVIS_COMMIT}
+    - echo "SHould be travis commit ${TRAVIS_COMMIT}"
     - docker version
     - docker-compose version
     - ./run_tests
