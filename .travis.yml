@@ -22,7 +22,7 @@ before_install:
     - sudo mv docker-compose /usr/local/bin
 
 script:  
-    - echo Should be travis build id ${TRAVIS_BUILD_ID}
+    - echo SHould be travis commit ${TRAVIS_COMMIT}
     - docker version
     - docker-compose version
     - ./run_tests
@@ -30,7 +30,7 @@ script:
 deploy:
     #tag docker image
     # use go script to build the image
-    # use go script to push the image to docker hub
+    # use go script to push the image to docker
     - docker tag earnest
     #push docker image
 #deploy to dockerhub( tag and push image)    
