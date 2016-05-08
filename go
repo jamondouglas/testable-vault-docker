@@ -16,7 +16,6 @@ D=docker
 ## Set version env based on build env.
 
 VERSION="${MAJOR_VERSION}"
-BUILD_VERSION=${VERSION} ${TRAVIS_BUILD_ID} ${TRAVIS_COMMIT}
 
 R="\x1B[1;31m"
 G="\x1B[1;32m"
@@ -105,8 +104,6 @@ function login_docker {
 
 function push {
   tag
-  login_docker
-  ${D} push ${NAME}:${MAJOR_VERSION}:${TRAVIS_BUILD_ID}:${TRAVIS_COMMIT:0:7}  
 
 }
 
@@ -115,7 +112,7 @@ function build {
 }
 
 function tag {
-  ${D} tag ${NAME} ${NAME}:${MAJOR_VERSION}:${TRAVIS_BUILD_ID}:${TRAVIS_COMMIT:0:7}
+  ${D} tag ${NAME} ${NAME}:${MAJOR_VERSION}
 }
 
 
