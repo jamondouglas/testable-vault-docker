@@ -31,6 +31,6 @@ deploy:
     #tag docker image
     # use go script to build the image
     # use go script to push the image to docker
-    - ./go push
+    # - ./go push
     #push docker image
 #deploy to dockerhub( tag and push image)    

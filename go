@@ -103,11 +103,13 @@ function login_docker {
 }
 
 function push {
+  info "in push"
   tag
 
 }
 
 function build {
+  info "in build"
   ${D} build -t ${NAME} .
 }
 
