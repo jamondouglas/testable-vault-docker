@@ -2,8 +2,13 @@
 
 set -e
 
+NAME=vault-dev
 echo "from go script JAMON JAMON AJMON  "
 
+## Docker compose name
+DC_SERVICE_DEV_IMAGE=service-dev
+
+## Executables
 DC=docker-compose
 D=docker
 
