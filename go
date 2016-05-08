@@ -3,7 +3,8 @@
 set -e
 
 NAME=vault-dev
-echo "from go script JAMON JAMON AJMON  "
+
+MAJOR_VERSION=$(cat major.version)
 
 ## Docker compose name
 DC_SERVICE_DEV_IMAGE=service-dev
@@ -11,6 +12,11 @@ DC_SERVICE_DEV_IMAGE=service-dev
 ## Executables
 DC=docker-compose
 D=docker
+
+## Set version env based on build env.
+
+VERSION="${MAJOR_VERSION}"
+BUILD_VERSION=${VERSION} ${TRAVIS_BUILD_ID} ${TRAVIS_COMMIT}
 
 R="\x1B[1;31m"
 G="\x1B[1;32m"
@@ -51,6 +57,7 @@ function helptext {
     echo "    ci           CI-specific commands"
     echo "      snap       Setup dependencies for SnapCI"
 }
+
 
 function info {
   echo -e "${G}${1}${W}"
@@ -96,6 +103,22 @@ function login_docker {
   ${D} login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} -e ${DOCKER_EMAIL}
 }
 
+function push {
+  tag
+  login_docker
+  ${D} push ${NAME}:${MAJOR_VERSION}:${TRAVIS_BUILD_ID}:${TRAVIS_COMMIT:0:7}  
+
+}
+
+function build {
+  ${D} build -t ${NAME} .
+}
+
+function tag {
+  ${D} tag ${NAME} ${NAME}:${MAJOR_VERSION}:${TRAVIS_BUILD_ID}:${TRAVIS_COMMIT:0:7}
+}
+
+
 case "$1" in
     help) helptext
     ;;
@@ -119,6 +142,6 @@ case "$1" in
     ;;
     *)
       helptext
-      error $"Usage: $0 {help|flyway|sbt|build|test|dev|ci|push|deploy}"
+      echo $"Usage: $0 {help|flyway|sbt|build|test|dev|ci|push|deploy}"
       exit 1
 esac
