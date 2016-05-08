@@ -105,6 +105,8 @@ function login_docker {
 function push {
   info "in push"
   tag
+  ${D} push ${NAME}
+  ${D} push ${NAME}:${VERSION}:${TRAVIS_BUILD_ID}:${TRAVIS_COMMIT:0:7}
 
 }
 
